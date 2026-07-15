@@ -1,0 +1,2 @@
+city,latitude,longitude,temperature_mean,humidity_mean,dew_point_mean,pressure_mean,u_wind_mean,v_wind_mean,precipitation_sum
+Vijayawada,16.5115306,80.6160469,31.613888888888887,53.31944444444444,20.719444444444445,1004.5680555555557,16.348003933188696,2.8019414229209145,0.4
