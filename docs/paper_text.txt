@@ -1,0 +1,540 @@
+﻿Heatwave Prediction on ERA5 Data Using Deep Learning Techniques
+Abstract
+This paper seeks to establish the usefulness of deep learning methods in heatwave prediction with the help of the ERA5 dataset. Heat waves, which are defined as periods of elevated temperature and humidity, are a critical concern because they affect the health of people, farming, water supply, and energy consumption. This study relies on state-of-the-art deep learning models such as Convolutional Neural Networks (CNNs), Recurrent Neural Networks (RNNs), and Long Short-Term Memory (LSTM) to predict heatwave cases. The data set utilized in this work is the ERA5-HEAT dataset; this is a high-resolution atmospheric reanalysis data set. In this paper, the process of data cleaning, temporal alignment, and spatial aggregation in handling large climate data sets has been described. More importantly, the idea of using deep learning models in capturing the temporal and spatial dependencies from meteorological data is well supported through real-life applications. As shown in the results, deep learning methods provide a higher level of accuracy and flexibility than traditional meteorological models. Finally, the study concludes with a reflection on the implications of the findings for public health, urban planning, and climate change adaptation.
+Keywords: Heatwave Prediction, Deep Learning, ERA5 Dataset, Convolutional Neural Networks (CNNs), Recurrent Neural Networks (RNNs), Long Short-Term Memory (LSTM), Atmospheric Reanalysis Data, Temporal Alignment, Spatial Aggregation, Meteorological Data, Public Health, Urban Planning, Climate Change Adaptation
+1 Introduction to Heatwaves and Their Impact
+A heatwave is usually a succession of unusually hot days with extended periods of high humidity, commonly experienced in countries of oceanic climate type. Such periods of high temperature far exceed the usual for a particular area and season and may last for days to weeks. 
+The definition of a heatwave is determined by region because of its dependence on the climate of the area being considered. Generally, a heat wave is proclaimed when the day's top temperature exceeds the customary maximum temperature by approximately 5 degrees Celsius (9 degrees Fahrenheit) or higher for several consecutive days [1]. 
+Heat waves are dangerous meteorological events because of their huge impact on human health, agriculture, water resources, and energy demand [2]. Constant staying for long at high temperatures causes heat-related illnesses, for example, heat exhaustion, heatstroke, or even death, with the oldest and the young being most affected, as well as those with previous medical conditions [3]. Also, heat waves can worsen drought impact on crops and so might increase the risk of wildfires. 
+In a scientific sense, heat waves are usually connected with high-pressure systems that are stationary over an area [4]. These weather patterns, known as "heat domes", can hinder the formation of clouds, and keep cool air levels at bay, which thus prevents the warm air from escaping to other areas [5]. Climate change too as the world is getting warmer is the cause of the increasing intervals of the heat waves. 
+The understanding and prediction of the heat waves are essential for the preparation and mitigation of their effects[6]. This can be a combination of meteorological monitoring, climate modeling, public health planning, and the establishment of heat action plans that include public alerting mechanisms and reduced exposure strategies [7].
+1.1 Impact of Heatwaves
+According to Costello et al. (2009) [8], p. 1693, climate change is "the biggest global health threat of the 21st century," placing "lives and wellbeing of billions of people at increased risk." Moreover, Watts et al. (2015) [9] have characterized the anticipated consequences of climate change as "an unacceptably high and potentially catastrophic risk to human health." The World Health Organization (WHO) acknowledges that the majority of the effects of climate change will be detrimental to human health and that the areas with the worst health infrastructure will be the least equipped to prepare for, respond to, and adapt to the range of increased health risks that are likely as a result of climate change (World Health Organization, 2017).
+It is commonly acknowledged that exposure to higher temperatures negatively impacts human health, leading to higher rates of morbidity and mortality in a range of geographic areas. Numerous high-heat events around the world, such as the one that occurred in Chicago, USA in 1995 (Whitman et al., 1997) [10], the heatwave that swept through Europe in 2003 (Kosatsky, 2005) [11], and the one that occurred in South-East Australia in 2009 (Nitschke et al., 2011), have shown this effect. Moreover, a correlation has been shown worldwide between rising temperatures and rising rates of sickness and mortality [12]. This proves that heat-related illnesses and fatalities can happen outside of defined extreme events and regardless of the actual temperature.
+Environmental Impacts
+Heat waves which can be described as a period of hot and seasonal weather are a subject of concern nowadays due to their destructive consequences in the environment [13]. They include changes in biophysical, ecological, and hydrological processes that have increased since the frequency and intensity of heat waves have grown over several decades. 
+Ecosystem Disruption
+Heat waves disrupt the ecosystem significantly by stressing different plant and animal species within the affected environment. Another effect that is caused by high temperature is a change in phenological patterns, such as the timing of flowering and fruiting in plants. This change has implications for all food chains, which will have implications for species that feed on these plants [14][15].
+Moreover, heat waves also enhance the effects of drought which results in water disparities in soil and water systems: terrestrial and aquatic biomes. Predatory insects may exterminate ground vegetation, while other plants may wilt due to lack of moisture which hinders their growth and can lead to high mortality rates. It warms up the water bodies and reduces the dissolved Oxygen in the water which affects the fish and other aquatic forms and leads to death also decreases the number of forms of life known as biodiversity [16]. This change in the occurrence of seasons involving shifts in migration and duration of periods of drought brings adjustments of amenities such as habitat destruction, species displacement, competition for resources, and, possibly species annihilation.
+Biodiversity Loss
+Heat waves play a role in the deterioration of species? habitats because many of them cannot survive when the environment is too hot. Protozoans may experience variations in temperatures which result in an increase in their mortality rates given the fact that such species cannot easily move to cooler regions. For instance, some amphibians and reptiles are intolerant to heat usually more threatened during heat waves as their bodies can only operate according to certain temperatures [17]. It is well illustrated by the fact that such species are relatively slow-moving animals; they cannot move from one area to the other in an attempt to avoid the increasing pressure from the human population, hence a decline in their numbers.
+Heat waves are defined as consecutive days with minimum temperatures above average, and aquatic species are known to be sensitive to them. For example, warm waters can produce hypoxic conditions, which mean near-total oxygen depletion, paving the way for the ?die-off? of fish in numbers [18]. These functions upset species interactions and can bring about the collapse of the target?s local fisheries ? impacting overall species richness and human sustenance.
+Heat waves are also presumed to have severe effects on another identified ecosystem which is the coral reefs. Extreme heat weakens corals to the extent of breaking their symbiotic relationships with algae, causing the loss of beautiful colors and they lose their meaning and energy source as well. Under stress, waters containing bleached corals can make corals diseased, or give way to death [19]. This reduction in corals is not only dangerous for the health of the reefs but has also led to drastic declines in marine life residing in coral areas and eating on the reefs hence reducing the marine species? diversity.
+Concisely, heat waves cause a high level of stress to the environment in terms of exceeding tolerance limits for mortality and loss of habitats thereby affecting the loss of biodiversity across different ecosystems.
+Forest Fires
+Another effect of heat waves is that forest fires broke out more frequently, which is evident in the increased number of cases reported. Hot and dry weather as a result favors the occurrence of wildfires as has been pegged on modern-day examples. Such fires not only burn large portions of forests but also emit a large amount of carbon dioxide thus interfering with the climate of the region [20][38].
+But in common conditions that occur in the summer period, such as heat, people do not immediately notice the danger of fire: vegetation turns brown and becomes highly combustible. The human involvement of the fire or lighting can trigger a big fire since a tiny fire can lead to a huge disaster. Deforestation affects primary productivity by eradicating the living standards and sources of other living organisms. Also, whenever trees burn, they release CO2 that is stored in them, thus worsening the state of the climate. Deforestation means the elimination of forests also decreases the ability of the planet to reduce the concentration of CO2 in the atmosphere, which leads to the formation of the greenhouse effect which is a major issue of global warming [21]. 
+Heat waves hugely contribute to the chances of forest fires, and these are some of the worst disasters in that they have short and long-term effects on the environment.
+Soil Degradation
+The temperature fluctuations also accelerate soil degradation due to high evaporation rates that result in loss of soil moisture. This leads to the drying up of the soil health something that deters plants from other essential ingredients of rich health. Therefore, crop yields decrease due to limitations in investment, production, and yield, directly affecting food security and resulting in financial losses.
+In arid and semi-arid land, this process results in desertification whereby the fertile land converts to desert due to continuing drought [22]. Even in cases where these plants are found growing, major instances of soil degradation can hamper crop farming, fueling food scarcity and other hardships in farming societies [41].
+Water Resource Depletion
+When there is scorching hot weather during heat waves, water evaporation rates from water bodies rise, limiting the supply of fresh water. Algal blooms decrease water resources meant for drinking, and agriculture, and disrupt the health of aquatic systems.
+Snow and ice depth, concentrations of glaciers, reservoirs, lakes, rivers, etc decrease because water evaporates more and causes low levels of water. This results in a lesser quantity of water to be used by humans to meet their drinking requirements and also for agriculture, which requires fresh water in large quantities to support irrigation. Further negative effects are also experienced in the aquatic habitats because reduced water volumes and higher temperatures are factors that can create depleted oxygen levels that are not healthy for the fish and other aquatic animals [23].
+In areas where water is already scarce, heat waves are known to escalate demands and water Scarce Resource and Conflict Potential as competitive demands rise due to water limitations resulting from heat waves. This is because adequate and quality water that meets the needs of different communities will be hard to come by due to climate change's social and economic impacts.
+Impacts on Agriculture
+There is a direct link between agriculture and temperature fluctuations; this means that heat waves are very damaging, particularly for crops. High temperatures normally inflict their effects on the crops through direct effects that may result in low yields. For instance, high heat stress levels that affect plants can significantly hinder their growth and productivity and the yield and quality of produce.
+Besides, heat waves can contribute to pests and disease problems since they are likely to last longer in a given environment. Some of these pests are mostly found in warmer regions, and heat waves might cause pest outbreaks in this condition and other factors that compound the stress on existing weakening effects on crops due to high temperatures [24]. This has consequences of more damage by pests because they would be more visible in the fields, and has the effect of shrinking yields even more.
+Heating also impacts agricultural production since crops require suitable environmental conditions to grow; this not only results in food insecurity, but the economic loss is also significant for farming households. The result of lower yields is often small harvests which cut back farmers? income causing more deficits. Yet, as shown above, the expenditure required to curb pests, as well as the losses incurred on crops, add more pressure on the farmers.
+As a result, heat waves pose a risk to agriculture through the destruction of crops, reduction of crop yield, and proliferation of pests and diseases. Some of these impacts compromise food production while others pose livelihood challenges to farming families.
+Urban Heat Islands
+Heat waves expose us to the urban heat island where cities are hotter than the surrounding rural areas. This is attributed to the fact that cities largely adopt Concrete/Asphalt bases which are heat traps due to their dark coloration. Much of our city infrastructure, particularly the buildings and road systems, act like thermal reservoirs collecting and holding heat during the day and then only slowly releasing it at night and into the dawn.
+Consequently, the following problems arise as an extension of the urban heat island effect. First, it results in a high rate of energy consumption due to the usage of air conditioning systems in homes and corporations. This has a negative implication on the power systems, as it increases the load that has to be supplied to homes and businesses and it has been associated with higher emissions of pollutants from power stations that lead to air pollution and the greenhouse effect [25].
+Also, high temperatures compound the effects of diseases, particularly on the people living within the urban centers. Major health risks associated with heat waves include heat stroke and hospitalization outcomes from heat exposure due to the UHI impact, heat intensifies pre-existing diseases add on diseases including cardiovascular and respiratory ailments. Firstly, human beings in certain categories of risk such as the elderly and the disadvantaged are susceptible most of the time. Refer to Fig. 1 to understand about the environmental impacts of heatwaves.
+Fig 1. Environmental impact of heatwaves: A systematic diagram
+Health Impacts
+Direct Health Effects:
+Heatstroke and Heat Exhaustion
+Although heat waves are quite common during summertime, they bring about heat elements that can lead to heat stroke or heat exhaustion. Heat stroke is one of the most serious forms of heat illness, which involves a failure of the body?s temperature control mechanisms, in effect the body's heat index rises above 40?C (104 ?F). It can affect the central nervous system and cause complications such as impaired consciousness, seizures, confusion, or other similar manifestations. If left untreated, heat stroke is potentially life-threatening and is characterized by complications of organ dysfunctions and even irreversible destruction of fresh tissues in the core of the body [26][27]. Heat exhaustion is another kind of heat disorder but less severe as compared to heat stroke, manifests symptoms such as sweating profusely, dizziness, weakness, headache, and nausea. Again, heat exhaustion is not as severe as heat stroke, but in case it is left uncontrolled, it can end up causing heat stroke [40].
+Dehydration
+Sweating is the body?s natural response to hot climate and heat waves, which result in serious fluid depletion in the long run. Known as fluid loss, this occurrence, if left unchecked, leads to what is commonly referred to as dehydration. Some of the possible signs and symptoms of dehydration include dizziness, confusion, and general body fatigue. In extreme conditions, such as when one is not able to take fluids, especially water, the body's organs and tissues can shut down due to a lack of water to perform their required activities. It may affect several vital organs such as the kidney and cardiac structures, which can cause AKI and other related issues [28].
+Respiratory Problems
+Normally, one can easily fall ill, but other respiratory ailments can be especially worsened when in the middle of a heat wave. High temperatures can worsen air quality by raising concentrations of ground-level ozone as well as other pollutants in the air that can lead to aggravation of respiratory health problems such as asthma and chronic obstructive pulmonary disease (COPD). Patients with these conditions may also experience complications such that their symptoms like breathing difficulties, coughing, and wheezing are even exacerbated. Moreover, the act of using air conditioning to cool buildings in hot weather means that more electricity has to be generated, and because most electricity is generated from power plants that release large amounts of pollutants into the atmosphere, this puts added stress on air quality and increases the vulnerability for respiratory diseases where hot temperatures are experienced [29].
+Exacerbation of Pre-existing conditions:
+Cardiovascular diseases
+The extra burden this puts on cardiovascular will influence people with cardiovascular disease and this will make them vulnerable during heatwaves [30]. One neural consequence of heat stress is that body organ functioning particularly the heart is forced to struggle to keep the body?s core temperature normal in the high heat conditions[31]. This puts more stress and can result in such deadly conditions as heart attacks, arrhythmias, and even strokes. The heat can also cause dehydration which thickens blood hence making it hard for the heart to pump blood [32]. In addition, regular medicines that are prescribed for cardiovascular diseases like diuretics worsen dehydration and shifts in the levels of minerals during hot weather [33].
+Diabetes
+Diabetes can come with other health complications and, therefore, many people with diabetes are more at risk of adverse health impacts during heat waves. First of all, one of the most crucial signs, thermoregulation can also be affected in diabetic patients and hence, the possibility of heat stress. Besides, when the weather is hot and people sweat more, dehydration can prove quite dangerous in terms of impacting glucose levels. The lack of water discharges blood sugar levels since stress hormones such as adrenaline trigger the liver to release more glucose into the flow of blood [30]. In addition, how the human body manages insulin can be unreliable, especially in the summer and this makes diabetes a tough condition to manage [28].
+Kidney Diseases
+Through dehydration, heat stress, and its impacts, heat waves have been identified to pose a considerable risk to patients with renal diseases. Restriction of water causes a decrease in blood perfusion to the kidneys, and this in turn can result in acute kidney injury in susceptible groups such as the elderly and individuals with compromised renal function. Aging may affect renal function by altering the frequency and severity of acute renal failure, and dehydration, which is also hazardous for patients with diabetes, does impair the kidneys? ability to regulate water and electrolytes, resulting in dangerous penalties [31]. Also, common prescription drugs that are used to address other renal ailments for instance diuretics can also worsen the effects of heat such as the likelihood of dehydration and renal failure [34][35].
+Indirect Effects:
+Mental Health
+Stress can be one of the most telling signs of someone who is experiencing heat waves since mental health may be on the line too. Activities of daily living become problematic within extreme heat and it becomes easier for those suffering from mental illness like depression and anxiety to worsen. Also, it can be stated that heat accelerates the rates of suicide cases as well as increases indecent behavior. For instance, scientists have observed that during summer, people get irritated easily, have charged dispositions and there is a high likelihood of violent confrontations. The physiological stress brought about by heat impacts the circadian rhythm, hampers sleep quality, influences the individual?s capacity to handle everyday stress, and contributes to these negative mental health outcomes [33].
+Disruption of Health services
+Heat periods are to some extent affecting the healthcare systems. Rising instances of heat stroke and dehydration mean that there is a high likelihood of your attendance at hospitals shooting up [39]. This can also cause congestion in hospitals and other health facilities making it very hard to provide quality treatment to patients as required. In the same way, the healthcare workers that are in the system can also feel the heat, exacerbating the situation and making it even harder to provide care for patients. The disruption is especially observed in places that may not be equipped to handle heat events at that level or intensity in the first place, the necessary infrastructure may not be in place to control demand for generators, water, etc.
+Impact on Vulnerable populations
+Some communities are more vulnerable to the onset of heat waves than others are. Due to their fragile state, the elderly and children are vulnerable to the ill effects of heat, for example; they are unable to contain the heat in their body naturally as younger, healthier people can. Employees working in direct contact with the outdoor environment and people with compromised cardiovascular or respiratory health are most vulnerable [36]. Moreover, socio-economic conditions are known to have a direct influence on the issue and act as a contributing factor towards vulnerability [37]. Some social determinants of health that could contribute to a higher mortality rate of people in heat waves include poor income and wealth, unsuitable housing, deficient access to transport and cooling such as through air conditioning and cooling centers, and inadequate care through health facilities. Again, the loneliness that is prevalent among elderly people will aggravate the situation since they may not actively seek medical attention. Even if they do, they may not find it as easily as young people. Fig. 2 summarizes the points related to the health impacts of heatwaves
+Fig 2. Impact of heatwaves on Health
+2 Overview of ERA5 Data
+The ERA5-HEAT (Human thErmAl comforT) dataset is a historical dataset that offers selected indices of human thermal stress and discomfort under outdoor situations. It uses the datasets from the European Centre for Medium-Range Forecasts (ECMWF) ERA5 reanalysis which is a global, high-resolution, atmospheric reanalysis, based on the ECMWF interim reanalysis project started in 1991, that blends model data with observations from around the world to provide a second-by-second description of the climate across the planet and its changes over the past few decades [43]. Due to this, ERA5 is a good proxy for observed atmospheric conditions because it incorporates all the components above.
+2.1 Main variables
+2.1.1. Mean Radiant Temperature (MRT)
+Units: Kelvin (K)
+Description: Mean radiant temperature, or MRT, is one of the primary parameters used to determine thermal comfort. It measures the constant temperature of an abstract black body radiation cavity (? = 1) that one would predict the gross phenomena of radiation heat transfer to or from a person, as does the actual and rather complex environment. Essentially, MRT captures the combined effects of all radiant heat sources surrounding a person. Essentially, MRT captures the combined effects of all radiant heat sources surrounding a person, including:
+Direct Solar Radiation: Real heat obtained from the sun-exposed areas depends on time, weather conditions, and shading.
+Diffuse Sky Radiation: Diffuse radiation: is a form of solar radiation that hits the Earth?s surface from every direction of the sky and on any type of day, including snowy ones.
+Reflected Radiation: Energy that bounces back from grounds, structures, and other frills like buildings and structures, etc.. This could vary depending on the type of surfaces and the degree of color that is seen on them.
+Long-wave Radiation: This is released by surrounding objects and surfaces inclusive of buildings vegetation ground and other objects present in the environment, as they have accumulated solar energy and have the potential to emit heat energy.
+The application of MRT is even more justified in the context of bioclimatology and thermal comfort investigations since this method provides a single calculational parameter that quantitatively describes the conditions of heat radiation in the immediate proximity of the human body. It is thus worthwhile to get acquainted with MRT to grasp the extent of the overall thermal load placed upon people. At the same time, they engage themselves in various endeavors across different weather conditions.
+2.1.2 Universal Thermal Climate Index (UTCI)
+Units: Kelvin (K)
+Description: The UTCI on the other hand is a complicated index formulated to accurately depict the thermal comfort of people under the open sky in any weather condition as discussed below. The temperature within the reference environment provides similar thermal stress to our body like sweat rate, shivering pace, skin wetness, blood circulation, and deep body temperatures as in the real environment. UTCI takes into account multiple factors:
+Air Temperature: The first one is the ambient temperature based on the feel outside or possibly inside a car or any other enclosed space.
+Wind Speed: About convectional heat loss, they have the following implications: They imply that when speed increases the convection, heating, or cooling, of an environment is enhanced and may be useful in keeping a climate cool.
+Humidity: Affects evaporative cooling. High temperatures also increase the emission of metabolic heat, while high humidity slows the rate of heat loss through the vaporization of sweat.
+Radiation: Comprises both solar and thermal radiation, whose effects determine heat in or out of the building. The combination of these factors defines the thermal injury endured by people.
+Combined, these elements give us UTCI, which represents one number that tells the overall thermal strain on people. Thus, UTCI is a highly helpful resource for public health organizations, commune and city designers, and other investigators; It can be used to learn more about the detrimental impacts of different climates and to devise ways how to minimize these consequences. Fig. 3 describes the UTCI for July 1981-2010 (as an example) [43].
+Fig 3. UTCI for July 1981-2010
+2.2 Description of the Dataset
+Data type:	Gridded
+Projection:	Regular latitude-longitude grid
+Horizontal coverage:	Global except for Antarctica (90N-60S, 180W-180E)
+Horizontal resolution:	0.25? x 0.25?
+Vertical resolution:	Surface level
+Temporal coverage:	From January 1940 to near real-time for the most recent version.
+Temporal resolution:	Hourly data
+File format:	NetCDF
+Conventions:	Climate and Forecast (CF) Metadata Convention v1.6
+Versions:	v1.1 (latest). This new version uses the new thermofeel library. The data is available in GRIB format.
+Update frequency:	Intermediate dataset updated daily in near real-time. Consolidated dataset monthly updates with a 2?3-month delay behind real-time.
+2.3 Detailed Description
+2.3.1 Mean Radiant Temperature (MRT)
+MRT is considered an important variable as part of the modern disciplines of bioclimatology and thermal comfort research. It thereby consists of different thermal radiation profiles that affect thermal comfort and thus give a holistic quantitative-like measure of the kind of thermal radiation housing the body. This measure includes:
+Direct Solar Radiation: The MRT alleys are exposed to direct sunlight and may be so all the time but it may change in terms of heat quantity and degree of heat reduction thereby altering the temperature. For example, during the middle of the day when the sun is directly overhead, there is an increase in the MRT.
+Diffuse Sky Radiation: Thus, the clear sky radiation is mainly in the vertical direction indicating the thermal conditions even in the cloud condition, but certainly of lesser intensity than clear sky conditions. This is a radiation which in most occasions is less than the radiation given out by direct sunlight but it is always present and affects MRT.
+Reflected Radiation: Solid structures for instance concrete pavements, asphalt car parks and other structural designs also release reflected radiation that may impact MRT, especially given that many constructs release radiation in urban settings.
+Long-wave Radiation: Located near the person the objects and surfaces emitting the thermal radiation in their surroundings. For instance, structures as well as other surfaces holding heat during daytime will at night release longwave radiation in support of MRT.
+According to these factors, therefore, MRT provides a bespoke solution for thermal loading assessment. It can be vitally significant to determine how climate conditions impact people?s health, comfort, and productivity since these factors may significantly differ in many circumstances.
+2.3.2 Universal Thermal Climate Index (UTCI):
+UTCI is designed to stand as a simple calibrated index that can be applied anywhere in freely in any type of weather; in the cold or the heat. It is founded on an elaborate approach that entails creating a simulation of the human body?s thermoregulation to the varying conditions of the environment. A tremendous difference in UTCI value is observed during the winter season, while a higher rate of expression is generally observed during the summer season. This model takes into account the following:
+Air Temperature: A condition of consistency in temperature that may be present surrounding an object or environment predominantly known as the base of heat.
+An example of the basic ambient temperature could be as follows: The first kind of temperature is the basic temperature, also known as the soak temperature which is the temperature of an object or environment during a heat cycling test.
+Wind Speed: By convective heat transfer coefficients: Used in the convective heat transfer coefficients. For example, cold wind moves at a higher speed and compresses the body thus giving one the impression that they are cold since the body?s ability to retain heat is lowered during such conditions.
+Humidity: It determines the body?s efficiency in regulating the rate at which it lets out heat through the sweat. This process can be influenced by humidity and it can make someone feel that it is hot within that environment when it is not.
+Radiation: Short wave radiation or the radiation and energy emanating from other bodies within the vicinity of a thermal system have impacts on thermal conditions such as solar radiation.
+These aspects are reflected in UTCI in that the final value that is calculated approximates the amount of thermal stress to which a given individual will be exposed. This makes it a powerful tool for:
+Public Health: Assisting those required to develop heat health warnings and the public awareness and education systems that inform the public/agencies as well as guard them against the adverse effects of heat/high limiting temperatures.
+Urban Planning: Supporting planners in the formation of measures for the strategy of designing cities and buildings regarding heat stress like changes in the irrigation of green space, kinds of stones for construction, reflection of heat and light, etc.
+Climate Research: It makes it easy for the researchers to know the impacts that climate change brings about to the thermal comfort and health across the years.
+2.4 Reason for choosing this dataset for experimentation
+Mean Radiant Temperature (MRT) is more effective in explaining the thermal environment than the dry bulb temperature because it takes into account the fabric of the radiation. While the air temperature just measures the heat in the air, the MRT incorporates the radiant temperature heat most relevant in stressing alive body. In this way, by taking into account all radiation sources, MRT gives better and more accurate information about how warm or cold an individual can perceive a certain environment. For instance, on a sunny April day, MRT can be higher than the air temperature due to the additional heat from the sun, thus, the environment is warmer. This is a factor that came out very well because when it comes to real applications like designing cities or worrying about epidemics, that measure gives a complete picture. Urban planners can also use data from MRTs to inform them how to reduce heat stress; whether commonly used building materials should be reflective; whether trees should be planted; or how buildings should be designed to reduce the heat gain. Thus, using the data obtained through MRT, public health officials can alert the public to heat and institute measures to prevent heat and other heat-related illnesses.
+The Universal Thermal Climate Index (UTCI) provides a better estimate of thermal risk by comparing varying degrees of heat stress after accounting for the impact of some of the main climate variables. It distinguishes wetness, shivering, and changes in skin and core temperature of a human body or human-like model. The explicit specifications offered by UTCI extend the capability of understanding thermal comfort so great that researchers and policymakers to comprehend the human heat stress for specific climate and weather conditions, which in turn is useful for assessing the impact of climate change. Some of the real-life implications of UTCI include within the areas of public health and in the aspect of city planning. UTCI data is relevant in the prognosis of heat health risk indicators and these can be used for public notification of high heat risk to minimize heat-related diseases and fatal cases. UTCI can therefore be used by urban planners in the planning and designing of structures, choice of material and accessories, and designing of spaces to improve thermal comfort, other than designing structures or spaces with high intensity of light since this may affect the occupants? thermal comfort.
+3 Data preprocessing and Feature engineering 
+3.1 Handling datasets of different magnitudes of large climatic variations
+When working with climatic data, where information often originates from large set databases such as the ERA5-HEAT, the measure of the population can be higher or lower significantly in magnitude because the climate is different across the globe and in different periods. The Process of data preprocessing therefore plays a key role in ensuring that the data obtained, contains no missing or erroneous information and that it is clean and ready for analysis and modeling. Here are some key steps and considerations in more detail.
+1. Data Cleaning
+Missing Data: Weather records and climate data are often incomplete due to various factors like failures in the sensors or the instruments used, lack of data transmission, or lack of observation. Remembering that these missing values have appeared during the data collection can be a major advantage since they can later create biases or inaccurate results. Methods to handle missing data include:
+Imputation: Imputing the samples based on those values that have been omitted but those that have the same characteristics as the samples. Some of the most frequently used approaches are simple linear interpolation that approximates the unspecified data values by averaging the neighbor values or employing more sophisticated scenarios such as employing a machine learning algorithm to approximate the missing values by analyzing the given data.
+Forward or Backward Fill: Using the last known value to fill in missing data points (forward fill) or using the next known value (backward fill). This is simple but can be flawed if the period of missing data is big.
+Outliers: Outliers are observed values that greatly differ from other observations and must be treated with utmost caution because they can distort results. The first step that always has to be taken is that of dealing with outliers. Methods include:
+Capping or Flooring: Restriction of output values to a certain upper or lower bound (maximum or minimum threshold).
+Robust Statistical Methods: This normally can be done with methods that are less likely to be skewed by outliers such as median analysis instead of mean, or even calculated standard deviation.
+2. Temporal Alignment
+Resampling: Regarding temporal data resolutions, climate data could be on an hourly, daily, or even monthly basis depending on the observation made. For a more consistent method of data analysis, the resampling techniques can resample the data to a standard time scale. For example:
+Upsampling: Pros: It could also be useful to convert daily data to hourly, in which case, one has to interpolate the values.
+Downsampling: Averaging or summing data on an hourly basis to present data on an assessment of a day.
+Time Zones: The time zone is important if climate data is obtained at different times from different geographical regions, this is to make sure that all data sets have a common temporal reference frame. This becomes important to analyze the time series more adequately.
+3. Spatial Aggregation
+Grid Aggregation: Climate information is usually in gridded forms and the grids may have fine resolutions (for instance 0. 25? ? 0. 25?). To reduce the complexity or focus on specific areas, spatial aggregation can be performed:
+Averaging or Summarizing: Integrating and aggregating information derived from multiple geographical grid cells into a single unified larger cell or group of distinct cells.
+Region-Based Analysis: Subsetting for small tracts including deltas, coastal lowlands, great plains, and large river basins, where local effects prevail.
+4. Handling Large Variations
+Segmentation: Instead of restricting the size or source of data for a particular project, it is recommended to split the dataset into various regions or various time frames to be able to manage differences in climatic data. It is more valid and useful to see individual parts rather than the whole picture This permits the analysis of localized regions, which can be more meaningful and precise than large-scale analysis.
+Regional Segmentation: Splitting the data set into subsets regarding geographical locations to evaluate climate characteristics in the corresponding area.
+Temporal Segmentation: It refers to a method of approaching data analysis of specific time durations, for example, seasonality or yearly comparisons.
+Feature Engineering: This is more effective because if one has to expand the features of the climate to be analyzed, one can create new features that better capture the variation of this climatic data.
+Anomaly Detection: Using an extended period to subtract the current variable to quantify abnormalities of the variable in question.
+Derived Variables: Developing new parameters, heat, cooling, or other relevant indices and aesthetical parameters, aggregated from several climatic characteristics.
+3.2 Normalization and Standardization Schemes for Time Series Data
+ Normalization is a procedure used in data preparation to change all data records so that their absolute values fall within a predefined level; the most common level is the interval [0, 1]. Consequently, this method makes a certain sense as it scales the data within the range of zero and a specified value which can be very helpful for machine learning methods that can be very sensitive to the detail and the scale of the data being taken.
+Min-Max Scaling
+Formula I:
+where:
+x is the original value.
+x? is the normalized value.
+min(X) is the minimum value in the dataset.
+max(X) is the maximum value in the dataset.
+Application: 
+This is required if the data needs to be manipulated and restricted to form a certain range. Besides, it proved effective for those algorithms, such as neural networks or gradient descent optimization methods which work better when input is normalized.
+Standardization
+Standardization rescales the data such that the mean of the data is mean = 0, and its standard deviation = 1. It is applied for the normally distributed data or when the comparative values of features are important.
+Z-score Normalization:
+Formula II:
+where:
+x is the original value
+x? is the standardized value
+? is the mean of the dataset
+ is the standard deviation of the dataset
+Application:
+This technique is most suitable when algorithms assume that the input data follows a normal distribution like linear, logistic regression, principal component analysis (PCA), etc.
+Handling Seasonality and Trends
+Detrending:
+The purpose is to remove trends from the time series data allowing for the analysis of fluctuations around the trend. Differencing is the technique followed, where each data point is subtracted from the previous one.
+Formula III:
+Application: This method is useful for converting non-stationary data into stationary one as it is a requirement for many time series models.
+Seasonal adjustment
+The purpose of this is that seasonality can be either filtered out or removed to allow for other underlying patterns in the data to be observed. Time-series decomposition, for instance, Seasonal Decomposition of Time Series (STL), enables the breakdown of the series into various components such as seasonal, trend, and residuals.
+Application: This is especially useful when trying to disentangle the seasonal patterns from other overlying fluctuations that occur in the time series; this assists in enhancing the precision of forecasting.
+Time Series-Specific Scaling
+Rolling Window Scaling:
+The purpose is to normalize or standardize data within a rolling window to capture local trends and variations. We apply scaling methods within a window that moves over the data. For instance, a rolling mean normalization:
+Formula IV:
+where: n is the window size
+Application: This method is useful for non-stationary time series as it easily adapts to changes over time.
+Feature Scaling
+Log Transformation:
+The purpose is to handle skewed data and reduce the impact of large outliers. We can use logarithmic transformation to transform the data:
+Formula V:
+1 is added to avoid log 0 as it is undefined.
+Application: It is useful for data spanning several orders of magnitude, as it compresses the range of values and reduces skewness.
+For details refer to Fig. 4 where an example related to data preprocessing has been displayed for better understanding.
+Fig. 4. This is an example that aims at outlining the preprocessing of time series data in detail concerning the temperature data to help in creating models for analysis. This entails practicing essential pre-processing techniques like normalization, standardization, as well as transformation to deal with issues like scale, trends, seasonality, and outliers.
+4 Deep Learning for prediction of weather conditions
+Machine learning involves a specialized branch called deep learning that has greatly transformed various disciplines such as meteorology in terms of enormous dataset pattern recognition. Contrary to standard approaches that require engineering features and creating physical models, deep learning models are capable of self-learned representations from given data. This capability makes them very suitable for high-dimensional and non-linear spaces, which translate to weather information.
+4.1 The Role of Deep Learning in Meteorology
+Complex Pattern Recognition:
+Traditional Methods: Generally, using some physical equations and statistical methods, meteorological models perform weather forecasts. These methods are generally computationally intensive and may take days to build up and tune the models to work in their specialized fields.
+Deep Learning Models: These models are often deep learning models like convolution neural networks (Convolutional Neural Networks: CNNs) or recurrent neural networks (Recurrent Neural Networks: RNNs) where these models do not require the extraction of special features of meteorological data. This ability enables you to capture more detailed and complex relationships within the dataset.
+Handling High-Dimensional Data:
+One challenge is that the meteorological data can contain multiple variables like temperature, relative humidity, wind speed, air pressure, and so on over multiple time steps and locations.
+It is also crucial to note that deep learning models are capable of handling complex and large datasets such as these. For instance, CNNs are useful for handling spatial data such as satellite images, while RNNs especially the Long Short-Term Memory (LSTM) networks are useful where temporal dependency exists in the time series data.
+4.2 Deep Learning Neural Networks in Weather Predictions
+It shows that deep learning Neural networks have become essential tools for weather prediction since they can address temporal and spatial data elaboratively. Here?s a detailed exploration of the three most notable types of deep learning neural networks used in this field: from a family of CNNs, RNNs, and LSTM networks.
+1. Convolutional Neural Networks (CNNs)
+Description:
+Architecture: There are several layers in CNNs such as convolution layers, pooling layers, and the output fully connected layers. The convolutional layers help in performing the filtering of the data that was inputted to the network then move to the pooling layer to minimize the dimension of the map and then the fully connected layer to predict the data.
+Learning Mechanism: Backpropagation uses the error for training CNNs through which the spatial hierarchies of features are learned. During the training phase, they at some point reconfigure the weights attached to the filters to achieve the smallest possible error.
+Application in Meteorology:
+Satellite Image Classification: Based on experiments, CNNs are effective in the classification of distributed cloud formations, actual land surfaces, and atmospheric phenomena in satellite images. This is essential and significant in comprehending and outlining the climate conditions and situations.
+Precipitation Forecasting: Hence, through the use of image radars, the CNNs can predict the occurrence and intensity of precipitation expected. This is useful in predicting rainfall, snowfall, and other relevant occurrences on the ground.
+Identifying Weather Patterns: Other demonstrations include cyclones and certain fronts of weather from the satellite and radar are captured and other demonstrations from the satellite and radar are detected by CNNs. These patterns are valuable for learning known as short-range forecasts of the climate.
+Example:
+For example, if we have to build a system that can distinguish between various forms of clouds from satellite images, we can train a CNN for this purpose. For this reason, the system can predict the formation of conditions such as storms or hurricanes and provide valuable information for constructing warnings.
+2. Recurrent Neural Networks (RNNs)
+Description:
+Architecture: The actual architecture of RNN is recursive given the fact that out(t) that is produced at one time step is turned into input for the next time step. It entails a loop that could allow the networking to store information on the earlier inputs.
+Learning Mechanism: Changes in the weights in RNNs use backpropagation of errors through time (BPTT). This empowers them to detect temporal relations about the data that is usually in chronological order.
+Application in Meteorology:
+Time Series Forecasting: Examining the ability of RNN as one of the feed-forward neural networks; this capacity of the network can be understood by training it with some previous data to predict variables such as temperature, humidity, wind speed, and pressure.
+Sequential Data Analysis: They can consecutively take a set of weather information and provide its forecast information concerning the actual condition. For example, the activity entails an endeavor to predict which team would be victorious in the subsequent football match bases with the other one being the database of the previous football match results.
+Example:
+For the RNN to be used the following are possibilities: making predictions concerning changes in temperature over some time that are marked by certain temperature recordings. This capability is useful in situations where there is a more frequent requirement for real-time and/or more frequent updates of the common climate in the environment.
+3. Long Short-Term Memory (LSTM):
+Description:
+Architecture: LSTMs are a further development of the basic RNN; they have a more complex architecture encompassing gates to regulate information processing: input, forget, and output gates. In this way, the LSTMs can remember and use information over long periods, with the help of this design.
+Learning Mechanism: The short memories appear by maintaining a constant error flow, which makes LSTMs able to learn long-term dependencies as opposed to standard RNNs which suffer from the vanishing gradient problem.
+Application in Meteorology:
+Long-Term Weather Forecasting: There are benefits to LSTMs such as the ability to forecast the weather over large periods like seasonal changes or even fluctuations over a long term regarding temperature or rainfall.
+Extreme Weather Event Prediction: They ensure that they predict disasters that may occur such as hurricanes, droughts, or heat waves within the weeks, months, or years to come based on previous data patterns.
+Example:
+LSTM network can be applied for analyzing the seasonal changes in temperature and for this. For instance, it can predict summer temperatures in previous years which is quite helpful for those planning during the heat period.
+Below is a case study where the objective is as follows:
+The purpose of this assessment is to utilize various deep-learning neural network structures including CNNs, RNNs, and LSTM for the modeling of the weather parameters based on the time series data. This includes calibration and testing of these models based on the synthetic temperature data to evaluate their capabilities of representing the temporal and spatial features within the meteorological data.
+Fig. 5 describes the arbitrary Synthetic daily temperature data for a specific period. 
+Fig. 5 Daily Temperature Data (1st January 2023 -  1st January 2024)
+We apply CNN, RNN, and LSTM to make future predictions. It is then run over 100 epochs. Fig. 6, 7, and 8 describe the predictions of the above Deep Learning techniques.
+Fig. 6 CNN predictions of the Synthetic time series
+Fig. 7 RNN predictions of the Synthetic time series
+Fig. 8 LSTM predictions of the Synthetic time series
+4.3 Advantages of Deep Learning Models Over Traditional Meteorological Techniques
+Deep learning models present several advantages over traditional models as they do not require detailed physical and statistical models to process the information.
+Handling High-Dimensional Data
+Traditional Techniques: They often struggle to support a wide range of dimensions on large datasets for different analyses.
+Deep Learning Models: A capability of performing operations to analyze Big Data which contains many variables and offers meaningful patterns and results without any sort of intervention from humans.
+Capturing Non-Linear Relationships
+Traditional Techniques: Include straightforward linear or minimally non-linear patterns to compare data, while oftentimes not encompassing all specifics of weather occurrences.
+Deep Learning Models: It can capture very complex relationships and hence promote the improvement of the function of constructing weather predictions.
+Learning from Large Datasets
+Traditional Techniques: It might be unable to fully utilize the amount of data that can be gathered or dealt with because of the monitorable computational capability.
+Deep Learning Models: The aptitude to distinguish between and process large data - archive data that can be analyzed as well as real-time data that can be infused into the model.
+Automation and Feature Extraction
+Traditional Techniques: require the manual extraction of the features where we may spend a lot of time and in some cases may not be able to identify the right patterns.
+Deep Learning Models: Make prognostications of the optimal condition for specific aspects of the raw data, help to obtain higher performance, and reduce the need to engage in monotonous manual processing.
+Scalability
+Traditional Techniques: Tend to require a significant amount of overhauling if it is to be adapted for growth or to be applied to other sectors or situations.
+Deep Learning Models: It means that these models are perfect for any scale, and with new sets of data, it can be easily retrained or fine-tuned and that makes the models suitable for any region and any changing climate conditions.
+Improved Accuracy and Resolution
+Traditional Techniques: However, they may have limitations in the point of prediction ability, the area and span, or coverage of the region under study.
+Deep Learning Models: Provide more accurate and precise predictions and they play a central role in the preparation of appropriate weather and warning prediction.
+5 Heatwave Prediction on ERA5 Data using traditional methodologies: A Case Study
+5.1 Comprehensive Analysis of Heatwaves in Portugal
+Objective
+The study intended to investigate the occurrence and the characteristics of the heatwaves on the main Portuguese land from 1980 to 2021 [42]. For this study, we employed the daily average temperature data which were extracted from the ERA5-Land dataset spanning from the years 1980 to 2020 to detect heatwaves, trends, and spatial frequency of heatwaves in the study area.
+Methodology
+1. Data Source:
+ERA5-Land Dataset: This dataset was extracted from the European Centre for Medium-Range Weather Forecasts (ECMWF) and is an hourly climatological data set that includes a lot of climatological parameters. The control variables included meant daily minimum and maximum temperature (Tmin and Tmax) were derived Mean daily maximum and minimum temperatures were calculated.
+Ground-Based Records: These studies indicate that the data accomplished from the Portuguese Met Office needed to verify the ERA5-Land dataset to ensure that it is reliable for the heatwave assessment.
+2. Heatwave Definition:
+Heatwave Magnitude Index (HWMI): Heatwave Meteorological Index (HWMI) was applied to categorize the heatwave into two groups and for operationalization of heatwave events. The baseline definition of a heat wave is three or more days of temperatures that are higher than the normal average temperatures for the given place and period.
+3. Validation and Analysis:
+Validation: This paper used the ERA5-Land Monthly Mean of Temperature and attempted to assess its accuracy based on ground measurements for nine grid cells over Portugal.
+Trend Analysis: Because of temporal data, statistical methods were applied to establish the heat-wave pattern from frequency or severity. Kernel rate estimation was also used in addition to exploring the numbers of heatwave events realized by Tmin and Tmax within the year.
+4. Spatial Analysis:
+Geographical Focus: The study was carried out in a number of regions in the main body of Portugal, some of the most developed regions with cosmopolitan features were subjected to this study like Lisbon and some of the northern and Core regions of Portugal were also used in the study. This in turn provided a general picture of the variability in heat waves relative to geographic locality.
+Findings
+1. Trend Analysis:
+Increasing Heatwave Days: It was observed that for the same region, the number of heat wave days does enhance progressively as the period of observation advanced. In particular, the investigation of the tendencies of the increase in heat waves was conducted on the climates of the southern interior and coastal zones, where a significantly higher rise in such indicators was identified.
+Regional Variations: Hence, comparing the number of heatwaves in Laeti with other regions of Portugal and mainland Europe, it is seen that Northern and interior regions exhibited the maximum number of days correlated with ?D Max ? heatwaves, whereas Lisbon displayed a high number of days related to ?D Min ? heatwaves due to the impact of UHI.
+2.? Temperature Changes:
+Temperature data disclosed in the research pointed to the fact that temperature changes over the twenty years of the heatwave days are more. For instance, the figures observed earlier by using the annual Tmax heatwave had it that these parts had risen by 10-30 in the year 2019 compared to the year 2018.
+3. Spatial Distribution:
+In the current study, the geographic information system was used to spatially identify the heatwave days distribution, and found out that there is a geography variation. In like manner, in the comparison of the heat waves of the regions, it, too, increases the maximum number of heat waves in the days for the southern interior and the coastal points of the grid.
+Significance
+This study is significant for several reasons:
+Validation of ERA5 Data: Accordingly, the present work validated the feasibility of employing the aforementioned ERA5-Land datasets concerning heatwaves through their comparison with observational data.
+Long-Term Trends: The heat wave research conducted in the study assessed forty years and from the analysis, it can be seen that heat waves are getting more successive and severe because of global warming.
+Regional Insights: Ultimately, Regional specificity enhances awareness of how heat waves affect regions and may be employed in developing regional-based adaptive measures.
+Policy and Planning: Thus, this research can be useful for policymakers and Urban planners to develop the necessary countermeasures depending on the specific sector to combat the impact of heat waves, primarily in high-risk zones.
+Techniques
+Statistical Analysis: Various statistical analyses were used to test the number of heatwave days, including the rising and fluctuation analysis.
+Kernel Rate Estimation: The following are the annual frequency of heat wave risks and it was useful to know heat wave risks and & get detailsII about each one of them.
+Comparative Analysis: Measurement of yielded data against ground records made it correct and provided an assurance of the study outcomes.
+5.2 Retrospection of Heatwave and Heat Index
+Objective
+This study aimed at studying the extremely severe heat waves in Europe of 2003 chiefly through recreating temperature trends and the heat index (HI): in Marmara, Turkey, and Naples, Italy regions [45]. The heat sensitization study was conducted to identify the variations in the temperature during the heat waves and to further establish the relationship between changes in temperature and the health effects documented.
+Methodology
+1. Data source:
+ERA5 Dataset: The study utilized the ECMWF?s ERA5 reanalysis dataset to capture the various climate parameters at a high temporal and spatial resolution. This dataset contains statistics of atmospheric, ocean-wave, and land-surface, statistics that have been calculated for each hour. Among all the factors, temperature and relative humidity the most attention was paid to in this work. 
+ 2. Heat Index Calculation: 
+ Heat Index (HI): They include; the Steadman equation which helps in estimating the HI when taken in conjunction with the prevalence points of temperature and relative humidity standard when used in establishing the Apparent temperature of a place. 
+ 3. Region-Specific Analysis: 
+ Marmara Region: Thus, the observations of fourteen weather stations in the present study and all of them are located in the Marmara region of Turkey. The sources of information included data in HI for the given period which ranges between 2007, and 2016 by stressing averages and peaks. 
+ Naples Region: In the case of the work under discussion, the author aims to describe certain aspects of two strong heat waves that affected Naples, Italy in 2003. Temp, rel humidity & wind speed, are essential motifs when working out the HI and assessing on health impact. 
+ 4. Health Impact Correlation: 
+ The study also investigated the correlation between HI and health risks or health risks related to events like hospitalization and mortality to determine the impact of heat on people?s health.
+Findings
+Temperature Trends:
+Marmara Region: Looking at the above data analysis, it could be realized that the temperatures have progressively risen with an excellent appreciation of about 1. Produce 19 percent less carbon dioxide emission below the average rate estimated in the 1980s ? that is 5?C below the average global temperature in the 1980s. On the same note, and regarding the rigidity of the climate, compared to the initial status, the regional relative humidity decreased by approximately 4% for the same duration.
+Naples Region: However, by generally higher in Neapolis by a margin of about 2 C degrees in the present climate compared to the 1980s. This resulted in higher temperatures within a year especially during summer because of African and Azores anticyclones.
+Heat Index Trends:
+Marmara Region: HI revealed that when the temperatures were slightly above twenty-one Celsius, the climates were regarded as semi-comfortable while climates with percentages above twenty-seven were seen as very uncomfortable. Thus in the case of the HI value the values obtained were observed to be increasing progressively over the period under consideration for the region.
+Naples Region: Referring to HI the degrees of heat in the summer of 2003 were higher as it identifies more impressions on health such as heat injuries and some fatal deaths. To reiterate, Subsection HI dealt with attitude to extreme conditions and their effects on human health.
+Health Impacts:
+These findings were corroborated by the HI above the HI admission rates and total deaths, which further confirmed the model. This was even more so during heatwaves such as the heatwaves that were witnessed during the summer of 2003 whereby many people suffered very much; this was occasioned when temperature and humidity hit the roofs.
+Significance
+Use of ERA5 Data:
+Therefore it becomes relevant to use the atmospheric data set of ERA5 to determine the temperature and HI. To advance our knowledge of heatwave impacts and apply high-resolution satellite imagery.
+Health Impact Analysis:
+Hence, the present research provides important data on the effects of heat waves on public health, having matched HI to the resultant health impacts. Consequently, such briefs are of great importance in the enhancement of risk and adaptation of frameworks relating to population health.
+Region-Specific Insights:
+ This is done based on the regional analysis of the specific impacts of heat waves, as well as the possibilities of the prevention and treatment of heat-related diseases in the given geographic region. These findings apply to the regions that commonly undergo high heat and will assist in planning and executing preventive measures against future effects of heat streaks. 
+ Dataset Features and Techniques 
+ Dataset Features: 
+ ERA5 Dataset: Provides information on the current weather of the places of the user?s interest in regards to the temperature, humidity and wind rate in the hour-space format. Due to the high density of the spatial and temporal resolution, ERA5 is suitable to be used in climatology applications. 
+ Techniques:  
+ Statistical Analysis: Calculating different means of temperature and humidity variations over time, and applying different statistic tests, the HI was estimated. 
+ Heat Index Formula: This HI average was computed with the help of Steadman?s formula taking into consideration the HI data collection of temperature and humidity based on the ERA5 dataset. 
+ Validation:  Performing the validation: The use of weather observation station data to some extent made to verify ERA5 data which in turn shows the accuracy of the study.
+5.3 Analysis of Heatwave Events in Central Asia
+Objective
+In this study, the authors aimed to assess the increasing trend of heatwaves and their frequency and duration in the Central Asia region from 1981 to 2020 based on the ERA5-Land data [44]. Such changes in the context of vital interest necessitated the study?s goal of monitoring alterations in heatwaves? incidence and time course and determining climatic factors? role in intensifying these conditions.
+Methodology
+Data Source:
+ERA5-Land Dataset: First of all the dataset entitled as ERA5-Land presents the real time as well as hourly average of the climate parameters and climate factors and it is made available by the European Centre for Medium-Range Weather Forecasts (ECMWF). In this connection, the parameters of temperature and humidity were used for this work more frequently.
+Heatwave Identification:
+Definition: L1: Heatwave: the occurrence of three more consecutive days where the maximum temperature recorded that day is above the 90th percentile of the annual temperature scale.
+Data Extraction: When analyzing the climatic factors in the study area, the climatic characteristics of the Central Asian countries, including Kazakhstan, Uzbekistan, Turkmenistan, Kyrgyzstan, and Tajikistan, the two factors compared were the temperature and humidity conditions.
+Analysis Techniques:
+Trend Analysis: Statistical procedures were employed in analyzing heatwave frequency and duration data to decipher the developmental characteristics of the heatwaves spanning the study period.
+Correlation with Climatic Variables: Temperature profiles as well as humidity and pressure changes were also taken into consideration by the study when searching for possible instances of heatwaves.
+Findings
+Increase in Heatwave Frequency and Duration:
+In detail, the study disproportionally exposed that heat-wave frequency enhancing four folds and heat-wave duration enhancing four points during 1981-2020 in Central Asia. This trend was established throughout several countries within the region However, a recent review by Wabiri-Math et al (2014) showed that some countries in the area were registering an increased trend in the rate of this disease.
+Climatic Variables:
+Temperature Anomalies: Heatwave was understood to be days with above average temperatures for a given location and the result indicated that positive temperature departure involves heatwave. New data shows that communities where temperature fluctuations from the average are drastically higher have been subject to longer durations of heat waves.
+Humidity Levels: Another factor that also contributed to worsening heat wave situations was the reduction in relative humidity as the level reduced. Lower humidity levels indicated in radiation balance less frequently, but the heatwaves were more significant coincidingly: perhaps, there is some kind of evaporative cooling in operation in such a location.
+Atmospheric Pressure: Some pressure distributions had been observed to increase the length of heat waves while others acted as seen by the significant effect of pressure oscillations in differentiating heatwave periods.
+Spatial Variations:
+He concentrated his analysis on the variations of anticipated heat waves across the regions and in terms of heatwave magnitude. For example, the southern countries of Central Asia ? Turkmenistan and Uzbekistan ? had a significantly higher HWS score than the countries in Northern Central Asia.
+Significance
+Geographical Insights:
+This paper builds on prior studies about the tendencies in heatwaves by adding geographical location data and using ERA5 data in Regions efficiently. Besides, it is crucial to consider any alterations in the characteristics of heatwaves by adopting a broader and more diverse territory of the CAS region.
+Climate Change Indicators:
+Ascribed to this category, the study contributes to the underlying general trend of higher heatwave intensity and several occurrences globally. Changes have also been highlighted in climatic variables and the study focuses on global warming as a cause of change in climatic systems of a specific region.
+Policy and Planning:
+According to the findings of the thesis, the chance to approve public policy and planning, in general and specifically within Central Asia, is important to grasp. Simulating the heatwave source and the reasons behind it would help in the determination of measures to prevent the heatwaves from getting worse in the future and the measures put in place to protect vulnerable populations and properties.
+Dataset Features and Techniques
+Dataset Features:
+ERA5-Land Dataset: Functions with detailed data sets representing temperature, humidity, wind speed, and some other climatic variables. Hourly data is important for temporal heatwave hotspot identification; therefore, the offered dataset provides valuable information in this regard.
+Techniques:
+Statistical Analysis: A descriptive type of analysis was utilized where trends of the variables and correlation coefficients were employed in the analysis of data.
+Heatwave Definition and Detection: Thus, adopting a rather stringent set of criteria for defining heatwaves while relying on historical temperatures and their percentile distribution helped to provide accurate identification of events.
+Correlation Analysis: Concerning the heatwave analysis and the climatic parameters, the following findings were developed to determine the drivers of heatwaves.
+5.4 Comparative analysis of the Heatwave studies using the ERA5 dataset
+1. Comprehensive Analysis of Heatwaves in Portugal 
+Concerning climate change, heatwaves have been recognized as one of the most serious, as well as the most fatal weather phenomena affecting Portugal, and in the following section, heatwaves in Portugal will be described extensively.
+Objective: Here it is taken into account the maximum temperature higher than the 90th percentile for the maximum temperature of the reference period in mainland Portugal (1981-2010).
+Methodology: Downloaded the ERA5-Land dataset and the extraction of high-resolution daily mean temperature data was also done and crosschecked with the ground station dataset. Data collected involved the use of meteorological variables and heat waves were matched using the Heatwave Magnitude Index (HWMI).
+Findings: For example, the heatwave intensity has been noticed to be on the rise with emphasis on the Southern interior and coastal zones of Portugal. Thus, it was possible to observe that heat waves change in their intensity through space.
+Significance: To provide support to the veracity of ERA5 data for the long-term heatwave analysis, the study explained how invaluable the data type is when it comes to portraying spatial patterns of heatwaves during four decades.
+2. Retrospection of Heatwave and Heat Index
+The heat index rose to the occasion and showed its intensity and impact in the current heat wave.
+Objective: Exploring the real-life heatwave that occurred in Europe in the summer of 2003, with regards to the variations in temperatures to the HI in regions such as Marmara and Naples.
+Methodology: Collected the data from ERA5 to document changes in global temperature and HI while later comparing them.
+Findings: The temperature has gradually been rising with special reference to the temperature rise during the 1980?s. HI was used in this study to investigate the health complications by comparing health indices of regions with high and low HI values to identify extreme HI values that were more risky than others; and to find out the areas that required more attention in terms of health improvement.
+Significance: Also highlighted the importance of using ERA5 data in the health effects of heatwaves and provided a regional approach that can help increase the awareness of local administrations and help them develop effective plans and possibilities for adaption.
+3. Climate change: Increase in the Heatwaves of Central Asia
+Objective: Searched for patterns in the increase of heatwaves in Central Asia during the period between 1981 and 2020.
+Methodology: Studied the variables dependent on the heatwave occurrences and their frequency with climatic parameters such as temperature and humidity.
+Findings: The heat wave occurrence frequency is rising significantly, and the heat wave?s length is extended. Temperature anomalies and relative humidity were critical in aggravating heatwave conditions due to WA's actions on the atmospheric conditions.
+Significance: Provided a geographical extension to the analysis of heatwaves NZ and the use of ERA5 data set, showed its applicability in a different climatic environment, and endorsed the phenomenon of a growing tendency of heatwave intensity reported across the world.
+Comparative results
+Trend Analysis:
+Portugal: Increased the overall recorded number of heatwave days further, especially those in the south and coastal areas?.
+Central Asia: Likewise, the intensity and the number of days that were warmer than the 1981-2010 average rose sharply across several countries in the region including in Southeast Asia, (Nature).
+Europe (Marmara and Naples): This was about the fact that there tends to be an augmentation in the temperatures and HI, particularly due to the heat waves that were felt in 2003.
+Climatic Drivers:
+Portugal: For example, global warming with increased temperatures, and shifts in the climate zones, had a considerable impact on the severity of heat waves.
+Central Asia: Such sub-conditions as fluctuations of temperature and deviations in humidity levels aggravated heat wave conditions and increased the risk of their occurrence.
+Europe: This category depicted a direct correlation with health repercussions as the relationship between temperature and humidity works in synergy with each other to determine HI, which is commonly known as Home.
+Health Impacts:
+Portugal: In a way, it provided abreast on potential climatic impacts but it did not elaborate consequences to health impact.
+Central Asia: While impacts on health were the least emphasized in the analysis, its relation to the heatwave duration and frequency might imply health-threatening scenarios.
+Europe (Marmara and Naples): HI values directly corresponded especially the HI values falling into the higher range with raised admission in hospital as well as, mortality, and widened the door to establish a broad picture comprehensively regarding the health impact of heat waves.
+Geographical Insights:
+Portugal: Data for the heat intensity of a single country with detailed information at the local level as well as data on the differences in the intensity of heat waves in different regions was gathered.
+Central Asia: Healthy and morbidity information across multiple countries, which introduced a much wider geographical context to the consideration of heatwaves? (Nature)?.
+Europe (Marmara and Naples): Precisely, it offers informative data on climatic conditions in some regions of Europe and regulatory measures relating to heat impacts on human health.
+6 Heatwave Prediction on ERA5 Data using Deep Learning Techniques: A Case Study
+6.1 A deep learning model for forecasting global monthly mean sea surface temperature anomalies
+The scholarly study titled ?A Deep Learning Model for Forecasting Global Monthly Mean Sea Surface Temperature Anomalies? presents and utilizes an Unet-LSTM model to predict sea surface temperatures (SST) using ERA5 data [47]. This model is a dual conception of CNN and LSTM network topologies together to incorporate spatial and temporal features of the data.
+Dataset and Features
+The climate data used in this study comes from an ERA5 reanalysis dataset containing higher time-resolution data. Key features extracted from ERA5 for this study include:
+Sea Surface Temperature (SST): This forms the core parameter of interest and is essentially the ?sea surface temperature?.
+2-meter Atmospheric Temperature (t2m): This variable complements the SST forecast by expressing temperature at a two-meter height above the ground level.
+Also of the class ERA5, the class contains data from January 1950 to May 2021 and has a temporal resolution of one month. The data has been collected worldwide but the analysis has been done specifically in the equatorial and subtropical Pacific Island region where the model has better skill.
+Data Preprocessing
+The data preprocessing steps involve:
+Grid Preparation: SST and t2m are combined into a global coordinate system with Latitude: 720 points & Longitude: 1440 points. This grid is then averaged to a 1?1 degree grid [180, 360] and then to [64, 128] grid to estimate the interpolated values.
+Normalization: The data is prepared so that the deep learning model behaves as expected for an input with a mean of 0 and a standard deviation of 1. Normalization is particularly effective in smoothening the scaling of input features, which can be useful in training neural networks, as they normally converge during their training.
+Model Architecture
+The Unet-LSTM model consists of:
+Unet Architecture: This is a variant of CNN called the Unet, and it is particularly tailored for image segmentation problems. These architectures have an encoder-decoder design, which is enhanced by skip connections that facilitate an understanding of the details as well as the context.
+LSTM Layers: LSTM or Long Short-Term Memory is a specific kind of RNN structure considered one of the best solutions for predicting sequences. They aid in capturing the temporal interactions as available in the SST data.
+The model accepted the latitude and longitude as inputs in the two-dimensional grids for each time step and used the SST anomalies for the future time steps as output. The training procedure is changing weights within a chosen object for the minimum possible prediction deviation.
+Results
+The evaluation of the Unet-LSTM model shows that the proposed model offers a good prediction accuracy, with an even stronger performance in the regions of interacting and sophisticated ocean-atmosphere phenomena such as throughout the equatorial and subtropical areas of the Pacific Ocean. Model performance is assessed through measures like Root Mean Squared Error (RMSE) and coefficients of determination. Our findings indicate that the proposed model is well capable of predicting SST anomalies with a reasonable degree of accuracy to adequate specification of both seasonal as also inter-annual variations.
+Techniques
+Key techniques used in this study include:
+2D Convolutions: For this reason, the top three features namely; globe, population density, and land cover were included in the model to capture spatial dependencies in the SST data.
+LSTM Networks: The above is about living dynamic relationships to capture temporal dependencies and/or give long-horizon forecasts.
+Normalization and Interpolation: As a form of data pre-processing, we wanted to ensure that the data were in the best possible state for the model to deliver its best performance.
+Encoder-Decoder Architecture: To make the model aware of both formant frequencies that are local and over the signal window as a whole.
+These aspects of the model and preprocessing steps are suitable for emerging climate data which has higher data dimensionality and more complex features to perform SST prediction with deep learning algorithms.
+6.2 An Interpretable Deep Learning Approach for Detecting Marine Heatwave Patterns
+The study ?An Interpretable Deep Learning Approach for Detecting Marine Heatwave Patterns? aims to adopt LSTM models to predict patterns of marine heatwaves by using SST data of ERA5. Unlike most studies that focus on predicting heat waves, this study also focuses on the ease of understanding the deep learning models as well as their decision-making processes [46].
+Dataset and Features
+The data employed in the current research is based on the ERA5 reanalysis database, which is an extensive source of historical climate data. Key features extracted from ERA5 for this study include:
+Sea Surface Temperature (SST): The first is a measure of the temperature of the ocean?s surface ? the primary variable of interest.
+Atmospheric Variables: It is clear that there may be additional independent variables such as air temperature, wind speed, and humidity that might also be added to the input layer to capture the maximum variation in the atmosphere and enhance the forecasting power of the model.
+Data Preprocessing
+Data preprocessing steps include:
+Temporal and Spatial Averaging: Real SST data is taken at certain temporal intervals (such as daily or monthly, according to the data availability) and geographic areas, which are often some ocean basins.
+Normalization: The normalizing of data which will enable all the features to have equal contribution in the learning process of the model.
+Feature Engineering: Introducing new variables that could capture a temporal framework or an interaction between variables.
+Model Architecture
+The main model chosen for the research of this paper is the LSTM (Long Short-Term Memory) network, which is a type of recurrent neural network that is used for stationary sequences and is capable of handling both short-term and long-term relations among the data. As a result, the LSTM model stands as one of the more appropriate models when it comes to time series prediction due to its long-term memory capabilities. See Fig. 9 for details
+Fig. 9 Basic LSTM unit structure explanation
+Techniques
+The following are the key methods and techniques employed in the study :
+LSTM Networks: To predict Future SST values from Past SST Observations and capture Temporal Dependencies in SST data.
+Explainable AI (XAI): Methods such as SHAP (SHapley Additive explanations) or LIME (Local Interpretable Model-agnostic Explanations) are employed to provide explanations of the predictions of the LSTM model, and the importance of different features in predicting the patterns is highlighted.
+Simple thresholding: The identification of marine heatwaves often entails identifying SST events that exceed a certain threshold (say, SST in the 90th percentile of all SST observations at a given location over a particular period).
+Regions of Focus
+The study is limited to certain regions and ocean basins, including regions where marine heatwave frequency is increasing. Examples include:
+Pacific Ocean
+Indian Ocean
+Atlantic Ocean
+Results
+The predictive ability of the LSTM model for spotting marine heatwave patterns was clear. Key findings include:
+Excellent Forecast Skill: The model gave successful predictions mainly because it was able to represent the non-linear relations of the SST temperature as well as marine heatwave occurrences.
+Interpretability: The transparent nature of the model provided an understanding of which features were most important in predicting heat waves, thereby making the model more interpretable and trustable.
+This study demonstrates the feasibility of using deep learning models, in particular LSTM networks, for predicting marine heatwaves in SST fields based on only SST data from ERA5. And it emphasizes model interpretability, making sure the predictions are not only accurate but also human-interpretable. This is fundamental for decision-making in climate change and marine management tiers.
+6.3 Deep Learning-Based Extreme Heatwave Forecast
+The study ?Deep Learning-Based Extreme Heatwave Forecast? uses the Convolutional Neural Network (CNN) model to predict heatwaves with data captured from the mid-latitude regions of the Northern Hemisphere. The model learns from Fourier-transformed data to work effectively with the geospatial data since the model is required to operate on spherical data of the Earth. This work has employed a supervised learning model where the Convolutional Neural Network (CNN) model gives the chances of a heatwave occurrence given the previous temperature data [48].
+Dataset and Features
+The data employed in this research is based on climate models and observations with an emphasis on the mid-latitudinal region of the Northern Hemisphere, particularly above 30? latitude. Key features include:
+Temperature Data: Surface and atmospheric temperature history data temperature measurements, historical records, and temperature data.
+Fourier-Transformed Data: To control the spherical nature of the Earth and set boundary conditions the data is projected into the frequency domain through the use of the Fourier transform.
+The data covers the period from the 1st of June to the 31st of August over a thousand simulated years and offers a large corpus for training and testing purposes.
+Data Preprocessing
+Data preprocessing involves several steps:
+Fourier Transformation: The temperature data is then transformed from a spatial domain to the frequency domain using a 64?64 grid which is more helpful when working with spherical geometry of the Earth.
+Normalization: Data is normalized so that every feature has the same importance during the process of model learning.
+Labeling: The prepared data is assigned binary labels that signify the occurrence (1) or lack (0) of heatwave conditions.
+Model Architecture
+The base model that has been employed in this study is the CNN as this model is well suited for handling high dimensional data and is also good at capturing spatial relationships. The architecture includes: 
+ Convolutional Layers: Both initial layers use filters of size 12x12 and 9x9 and ReLU activation function for learning spatial features of the input data. 
+ Max Pooling and Dropout: The max-pooling layers are used for the input size and dropout layers are used to eliminate overfitting in the process of training where some features are set to zero value. 
+ Fully Connected Layers: Thus, the feature maps are flattened and then passed through other fully connected layers and then finally passed through the sigmoid layer to produce the probability of a heatwave. 
+ Training and Testing 
+ The overall list of number series was further separated into two groups namely the training list and the testing list, The training list contained 900 numerical years while the testing list contained 100 numerical years. Here also the training set is sub-sampled so as not to be dominated by outliers which is common with big data that is imbalanced. Key training parameters include: 
+ Batch Size: The case will be one thousand samples per batch. 
+ Learning Rate: The learning rate is set to 2e-4 mainly due to AMSGrad than other optimizers which helps in faster and better convergence of the model. 
+ Epochs: The number of NFA for one was to be fixed at 10 while for the remaining ones, it was fixed at 5, as observed to boost performance.
+Results
+This study found that the CNN model produced high accuracy in predicting heat waves. Key findings include:
+High Accuracy: It was observed that the model had high prediction accuracy for the occurrence of heat waves based on performance measures like precision, recall, and F1-score.
+Spatial and Temporal Precision: To incorporate the spatiotemporal dependencies, the model used Fourier-transformed data and was able to provide accurate predictions of heat waves.
+Techniques
+The study employs several advanced techniques:
+Fourier Transform: To cope with spherical topology and to avoid problems related to the transformation of boundary conditions.
+Convolutional Neural Networks: To include the spatial correlation structure present in the data.
+Supervised Classification: With the help of historical data, it tries to estimate the likelihood of a heatwave to happen.
+7 Conclusion and Future Work
+Deep learning has proven to be a better approach to the prediction of heatwaves than conventional methods due to certain remarkable advantages. Climate analysis is characterized by high dimensionality and non-stationary, so the analysis or modeling of climate variables, such as temperature or humidity, and their correlations with other atmospheric and oceanic variables, cannot be simplified. Other deep learning structures such as the LSTM and CNN are preferable to tackle such problems as they are good at handling long dependencies and spatial characteristics respectively. For example, the Unet LSTM model to extract spatial features employs convolution and LSTM for the temporal characteristic of sea surface temperature abnormalities in the equatorial and subtropical Pacific.  
+ About the above-stated models, the following benefits apply. First of all, the appeal of deep learning methods is in the fact that they can learn features by themselves from the raw data, thus eliminating the need to predefine features by hand, which is a time-consuming and error-prone process. This is especially useful when analyzing big and highly detailed data such as ERA5 which incorporates a large amount of temporal and spatial data. Second, the deep learning models have easier ways to update the information they have learned; this means that they can always have the most updated information. This makes them suitable to use in areas where it is believed that the data patterns may shift due to climate changes.  
+ Also, as it was mentioned earlier deep learning models are well tailored to work with high-dimensions data. For example, the CNN-based model used to forecast heatwaves employs the Fourier transform of data to transform the earth to a spherical structure with easier boundary conditions hence improving the model?s predictive performance. This in turn not only increases the accuracy of the data but also allows us to get a deeper insight into the interconnection between the field features, which are characteristic of the climate.
+This approach not only raises the level of correctness of the data but also enables a deeper insight into the relationships between the field characteristics that are characteristic of the climate.  
+ Applying the XAI methods to explain the results from the deep learning models is also helpful in climate science. By using recently proposed techniques like SHAP (SHapley Additive exPlanations) and LIME (Local Interpretable Model-agnostic Explanations), experts can reveal how these models make decisions thereby improving the models? interpretability and credibility. This is because the number of people willing to believe and rely on the models to get things right in a policy and disaster preparedness context will be very high.  
+ In the future, further research in this field should be directed toward the following: First of all, some issues are still considered not solved, and one of them is the interpretability of the deep learning models. Thus, it is essential to develop new strategies for presenting these, and for the most part, other complex models, including LSTM and CNN, to further audiences and explain their working mechanisms to non-professionals. However, to improve the model, some suggestions can be made like using data from more than one source like satellite data and also many other reanalysis data sets. This would help to achieve a somewhat better understanding of the conditions that lead to heat waves as identified in this study by Frontiers. 
+ Also, there will be enhancement of computing power and algorithms in an area that will facilitate the real-time prediction and early warning of heat waves. These modifications will assist in handling the scaling of deep learning models to possibly a greater number of users as well as in scenarios that are resource-scarce to foster climate resilience and disaster preparedness. In conclusion, deep learning for heat wave forecasting is not only an innovation in climate science but also opens up certain possibilities for development and research on combating the impact of such climatic events.
+8 References
+1.	Heat Waves and Climate Change - Center for Climate and Energy Solutions. (2023, July 14). Center for Climate and Energy Solutions. https://www.c2es.org/content/heat-waves-and-climate-change/
+2.	Heat wave. (2024, May 7). Wikipedia. https://en.wikipedia.org/wiki/Heat_wave
+3.	Ebi, K. L., & Meehl, G. A. (2007). The Heat is On: Climate Change & Heatwaves in the Midwest. In Regional Impacts of Climate Change: Four Case Studies in the United States. Pew Center on Global Climate Change.
+4.	Koppe, C., Kovats, S., Jendritzky, G., & Menne, B. (2004). Heat-waves: risks and responses (No. EUR/03/5036810). World Health Organization. Regional Office for Europe.
+5.	Zuo, J., Pullen, S., Palmer, J., Bennetts, H., Chileshe, N., & Ma, T. (2015). Impacts of heat waves and corresponding measures: a review. Journal of Cleaner Production, 92, 1-12.
+6.	Lopez-Gomez, I., McGovern, A., Agrawal, S., & Hickey, J. (2023). Global Extreme Heat Forecasting Using Neural Weather Models. Artificial Intelligence for the Earth Systems, 2(1), e220035. https://doi.org/10.1175/AIES-D-22-0035.1
+7.	Campbell, S., Remenyi, T. A., White, C. J., & Johnston, F. H. (2018). Heatwave and health impact research: A global review. Health & place, 53, 210-218.
+8.	Costello, A., Abbas, M. M. E., Allen, A., Ball, S., Bell, S., Bellamy, R., Friel, S., Groce, N., Johnson, A. M., Kett, M., Lee, M., L?vy, C., Maslin, M., McCoy, D., McGuire, B., Montgomery, H., Napier, D., Pagel, C., Patel, J., . . . Patterson, C. (2009, May 1). Managing the health effects of climate change. Lancet. https://doi.org/10.1016/s0140-6736(09)60935-1
+9.	Watts, N., Adger, W. N., Agnolucci, P., Blackstock, J., Byass, P., Cai, W., ... & Costello, A. (2015). Health and climate change: policy responses to protect public health. The lancet, 386(10006), 1861-1914.
+10.	Whitman, S., Good, G., Donoghue, E. R., Benbow, N., Shou, W., & Mou, S. (1997). Mortality in Chicago attributed to the July 1995 heat wave. American Journal of public health, 87(9), 1515-1518.
+11.	Kosatsky, T. (2005). The 2003 European heat waves. Eurosurveillance, 10(7), 3-4.
+12.	Nitschke, M., Tucker, G. R., Hansen, A. L., Williams, S., Zhang, Y., & Bi, P. (2011). Impact of two recent extreme heat episodes on morbidity and mortality in Adelaide, South Australia: a case-series analysis. Environmental Health, 10, 1-9.
+13.	Kovats, R. S., & Koppe, C. (2005). Heatwaves: past and future impacts on health. Integration of public health with adaptation to climate change: lessons learned and new directions, 136-160.
+14.	Parmesan, C., & Yohe, G. (2003). A globally coherent fingerprint of climate change impacts across natural systems. nature, 421(6918), 37-42.
+15.	Parmesan, C. (2006). Ecological and evolutionary responses to recent climate change. Annu. Rev. Ecol. Evol. Syst., 37, 637-669.
+16.	Ciais, P., Reichstein, M., Viovy, N., Granier, A., Og?e, J., Allard, V., ... & Valentini, R. (2005). Europe-wide reduction in primary productivity caused by the heat and drought in 2003. Nature, 437(7058), 529-533.
+17.	Thomas, C. D., Cameron, A., Green, R. E., Bakkenes, M., Beaumont, L. J., Collingham, Y. C., ... & Williams, S. E. (2004). Extinction risk from climate change. Nature, 427(6970), 145-148.
+18.	Caissie, D. (2006). The thermal regime of rivers: a review. Freshwater biology, 51(8), 1389-1406.
+19.	Hoegh-Guldberg, O., Mumby, P. J., Hooten, A. J., Steneck, R. S., Greenfield, P., Gomez, E., ... & Hatziolos, M. (2007). Coral reefs under rapid climate change and ocean acidification. science, 318(5857), 1737-1742.
+20.	Westerling, A. L., Hidalgo, H. G., Cayan, D. R., & Swetnam, T. W. (2006). Warming and earlier spring increase western US forest wildfire activity. science, 313(5789), 940-943.
+21.	Seidl, R., Schelhaas, M. J., Rammer, W., & Verkerk, P. J. (2014). Increasing forest disturbances in Europe and their impact on carbon storage. Nature climate change, 4(9), 806-810.
+22.	Schlesinger, W. H., Reynolds, J. F., Cunningham, G. L., Huenneke, L. F., Jarrell, W. M., Virginia, R. A., & Whitford, W. G. (1990). Biological feedbacks in global desertification. Science, 247(4946), 1043-1048.
+23.	Dai, A. (2013). Increasing drought under global warming in observations and models. Nature climate change, 3(1), 52-58.
+24.	Lobell, D. B., Schlenker, W., & Costa-Roberts, J. (2011). Climate trends and global crop production since 1980. Science, 333(6042), 616-620.
+25.	Stone, B., Hess, J. J., & Frumkin, H. (2010). Urban form and extreme heat events: are sprawling cities more vulnerable to climate change than compact cities?. Environmental health perspectives, 118(10), 1425-1428.
+26.	Zuo, J., Pullen, S., Palmer, J., Bennetts, H., Chileshe, N., & Ma, T. (2015). Impacts of heat waves and corresponding measures: a review. Journal of Cleaner Production, 92, 1-12.
+27.	Al Mahri, S., & Bouchama, A. (2018). Heatstroke. Handbook of clinical neurology, 157, 531-545.
+28.	Kenny, G. P., Yardley, J., Brown, C., Sigal, R. J., & Jay, O. (2010). Heat stress in older individuals and patients with common chronic diseases. Cmaj, 182(10), 1053-1060.
+29.	Knowlton, K., Rotkin-Ellman, M., King, G., Margolis, H. G., Smith, D., Solomon, G., ... & English, P. (2009). The 2006 California heat wave: impacts on hospitalizations and emergency department visits. Environmental health perspectives, 117(1), 61-67.
+30.	Hajat, S., & Kosatky, T. (2010). Heat-related mortality: a review and exploration of heterogeneity. Journal of Epidemiology & Community Health, 64(9), 753-760.
+31.	Hansen, A. L., Bi, P., Nitschke, M., Ryan, P., Pisaniello, D., & Tucker, G. (2008). The effect of heatwaves on mental health in a temperate Australian city. Epidemiology, 19(6), S85.
+32.	Berry, H. L., Bowen, K., & Kjellstrom, T. (2010). Climate change and mental health: a causal pathways framework. International journal of public health, 55, 123-132.
+33.	Burke, M., Gonz?lez, F., Baylis, P., Heft-Neal, S., Baysan, C., Basu, S., & Hsiang, S. (2018). Higher temperatures increase suicide rates in the United States and Mexico. Nature climate change, 8(8), 723-729.
+34.	Williams, S., Nitschke, M., Sullivan, T., Tucker, G. R., Weinstein, P., Pisaniello, D. L., ... & Bi, P. (2012). Heat and health in Adelaide, South Australia: assessment of heat thresholds and temperature relationships. Science of the Total Environment, 414, 126-133.
+35.	McMichael, A. J., Woodruff, R. E., & Hales, S. (2006). Climate change and human health: present and future risks. The lancet, 367(9513), 859-869.
+36.	Cheng, J., Xu, Z., Bambrick, H., Prescott, V., Wang, N., Zhang, Y., Su, H., Tong, S., & Hu, W. (2019). Cardiorespiratory effects of heatwaves: A systematic review and meta-analysis of global epidemiological evidence. Environmental research, 177, 108610. https://doi.org/10.1016/j.envres.2019.108610
+37.	Perkins, S. E., Alexander, L. V., & Nairn, J. R. (2012). Increasing frequency, intensity and duration of observed global heatwaves and warm spells. Geophysical Research Letters, 39(20).
+38.	Russo, S., Dosio, A., Graversen, R. G., Sillmann, J., Carrao, H., Dunbar, M. B., ... & Vogt, J. V. (2014). Magnitude of extreme heat waves in present climate and their projection in a warming world. Journal of Geophysical Research: Atmospheres, 119(22), 12-500.
+39.	Fischer, E. M., & Sch?r, C. (2010). Consistent geographical patterns of changes in high-impact European heatwaves. Nature geoscience, 3(6), 398-403.
+40.	Robine, J. M., Cheung, S. L. K., Le Roy, S., Van Oyen, H., Griffiths, C., Michel, J. P., & Herrmann, F. R. (2008). Death toll exceeded 70,000 in Europe during the summer of 2003. Comptes Rendus. Biologies, 331(2), 171-178.
+41.	Sehgal, V., Gaur, N., & Mohanty, B. P. Global Flash Drought Monitoring using Surface Soil.
+42.	Espinosa, L. A., Portela, M. M., Moreira Freitas, L. M., & Gharbia, S. (2023). Addressing the Spatiotemporal Patterns of Heatwaves in Portugal with a Validated ERA5-Land Dataset (1980?2021). Water, 15(17), 3102.
+43.	Copernicus Climate Data Store | Copernicus Climate Data Store. (n.d.-b). https://cds.climate.copernicus.eu/cdsapp#!/dataset/derived-utci-historical?tab=overview
+44.	Jiao, D., Xu, N., Yang, F., & Xu, K. (2021). Evaluation of spatial-temporal variation performance of ERA5 precipitation data in China. Scientific Reports, 11(1), 17956.
+45.	Awasthi, A., Vishwakarma, K., & Pattnayak, K. C. (2021). Retrospection of heatwave and heat index: a case study using ERA5 dataset.
+46.	He, Q., Zhu, Z., Zhao, D., Song, W., & Huang, D. (2024). An Interpretable Deep Learning Approach for Detecting Marine Heatwaves Patterns. Applied Sciences, 14(2), 601.
+47.	Taylor, J., & Feng, M. (2022). A deep learning model for forecasting global monthly mean sea surface temperature anomalies. Frontiers in Climate, 4, 932932.
+48.	Jacques-Dumas, V., Ragone, F., Borgnat, P., Abry, P., & Bouchet, F. (2022). Deep learning-based extreme heatwave forecast. Frontiers in Climate, 4.
